@@ -296,7 +296,7 @@ exports.sendEmail = async (req, res) => {
         });
        
         console.log('Message sent: %s', info.messageId);
-        res.status(200).json({ message: 'Email sent successfully', messageId: info.messageId });
+        res.status(200).json({ success : true , message: 'Email sent successfully', messageId: info.messageId });
 
 
     } catch (error) {
