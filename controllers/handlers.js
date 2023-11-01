@@ -286,7 +286,7 @@ exports.sendEmail = async (req, res) => {
             <div style="background-color: #ffffff; max-width: 600px; margin: 0 auto; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
             <h2 style="color: #333333;">Your Company - Job Application Response for ${jobTitle}</h2>
             <p>Dear ${fullName},</p>
-            <p>We would like to thank you for your recent job application to [Job Position] at our company. We have received your application and would like to inform you that your application is currently under review.</p>
+            <p>We would like to thank you for your recent job application to ${jobTitle} at our company. We have received your application and would like to inform you that your application is currently under review.</p>
             <p>If your qualifications and experience match our requirements, we will reach out to you shortly to schedule an interview. Please feel free to reach out to us if you have any further questions or require additional information.</p>
             <p>Thank you once again for your interest in joining our team.</p>
             <p>Best regards,</p>
