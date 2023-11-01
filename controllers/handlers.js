@@ -140,13 +140,14 @@ exports.signup = async (req, res) => {
  }
 
  exports.createJob = async (req, res) => {
-    const { name, description, salary, companyname } = req.body;
+    const { email,fullName,phoneNumber,streetAddress,jobTitle } = req.body;
     try {
         const newJob = new Job({
-            name,
-            description,
-            salary,
-            companyname,
+         fullName,
+         phoneNumber,
+         streetAddress,
+         email,
+         jobTitle
         });
         const savedJob = await newJob.save();
         res.status(201).json({ message: 'Job created successfully', data: savedJob });
@@ -256,7 +257,16 @@ exports.generateotp=async (req,res)=>{
 
 exports.sendEmail = async (req, res) => {
     try {
-        const { Email,name} = req.body; 
+        const { email,fullName,phoneNumber,streetAddress,jobTitle} = req.body; 
+
+        const newJob = new Job({
+         fullName,
+         phoneNumber,
+         streetAddress,
+         email,
+         jobTitle
+     });
+     const savedJob = await newJob.save();
 
         let transporter = nodemailer.createTransport({
             host: process.env.MAIL_HOST,
@@ -266,14 +276,16 @@ exports.sendEmail = async (req, res) => {
             },
         });
 
+        
+
         let info = await transporter.sendMail({
             from: process.env.MAIL_USER,
-            to: Email,
+            to: email,
             subject: "job applied",
          html:`
             <div style="background-color: #ffffff; max-width: 600px; margin: 0 auto; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-            <h2 style="color: #333333;">Your Company - Job Application Response</h2>
-            <p>Dear ${name},</p>
+            <h2 style="color: #333333;">Your Company - Job Application Response for ${jobTitle}</h2>
+            <p>Dear ${fullName},</p>
             <p>We would like to thank you for your recent job application to [Job Position] at our company. We have received your application and would like to inform you that your application is currently under review.</p>
             <p>If your qualifications and experience match our requirements, we will reach out to you shortly to schedule an interview. Please feel free to reach out to us if you have any further questions or require additional information.</p>
             <p>Thank you once again for your interest in joining our team.</p>
@@ -282,7 +294,7 @@ exports.sendEmail = async (req, res) => {
         </div>
             `,
         });
-
+       
         console.log('Message sent: %s', info.messageId);
         res.status(200).json({ message: 'Email sent successfully', messageId: info.messageId });
 

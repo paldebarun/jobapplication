@@ -2,22 +2,22 @@ const mongoose=require('mongoose');
 const nodemailer=require('nodemailer');
 
 const Job=new mongoose.Schema({
-    name:{
+    fullName:{
         type:String,
         require:true
       },
-    description:{
-        type:String,
-        require:true,
+  
+      phoneNumber:{
+        type:String
       },
-     
-      salary:{
-        type:Number,
-        require:true
+      streetAddress:{
+        type:String
       },
-      companyname:{
-        type:String,
-        require:true
+      jobTitle:{
+        type:String
+      },
+      email:{
+        type:String
       }
      
 
